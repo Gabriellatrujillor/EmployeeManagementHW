@@ -1,13 +1,18 @@
+// CREATE SQL INFO
+// UPDATE CHOICES 
+// UPDATE .THEN TO MATCH CHOICES
+
+
 // dependancies
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 const cTable = require("console.table");
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "",
+  // host: "localhost",
+  // port: 3306,
+  // user: "root",
+  // password: "",
   database: "employee_tracker",
 });
 
@@ -25,9 +30,9 @@ function runTracker() {
       type: "rawlist",
       message: "What would you like to do?",
       choices: [
-        "View all Employees by Nickname",
-        "View all Employees by Full Name",
-        "View all Employees by Department",
+        "View all Employee",
+        "View all Department",
+        "Add Department",
         "Add Employee",
         "Remove Employee",
         "Update Employee",
@@ -81,12 +86,12 @@ function runTracker() {
     });
 }
 
-function viewAllNickname() {
-  console.log("Retrieving people that have a fun name...\n");
-  connection.query("SELECT nick_name FROM employee", function (err, res) {
+function viewAllEmployees() {
+  console.log("Obtaining members of party...\n");
+  connection.query("SELECT * FROM employee", function (err, res) {
     if (err) throw err;
     // Log all results of the SELECT statement
-    console.table([{}]);
+    console.table([{employees}]);
     connection.end();
   });
 }
